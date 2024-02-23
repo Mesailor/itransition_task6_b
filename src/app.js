@@ -8,9 +8,9 @@ app.get("/boards", (req, res) => {
   try {
     // get boards from db
     let boards = [
-      { thumbUrl: "", title: "Alex's board" },
-      { thumbUrl: "", title: "Peter's board" },
-      { thumbUrl: "", title: "Max's board" },
+      { id: Date.now(), thumbUrl: "", title: "Alex's board" },
+      { id: Date.now() + 1, thumbUrl: "", title: "Peter's board" },
+      { id: Date.now() + 2, thumbUrl: "", title: "Max's board" },
     ];
 
     //send boards
