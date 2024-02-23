@@ -14,6 +14,7 @@ app.get("/boards", (req, res) => {
     ];
 
     //send boards
+    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.status(200).send(boards);
   } catch (e) {
     console.log(e);
