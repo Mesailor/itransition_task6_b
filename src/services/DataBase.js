@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const config = require("config");
 
 const { username, password, host, port } = config.get("Boards.dbConfig");
@@ -18,13 +18,43 @@ sequelize
     console.log("Unable to connect to DB: ", error);
   });
 
+const Board = sequelize.define(
+  "Board",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    thumbUrl: {
+      type: DataTypes.STRING,
+      // allowNull: false,
+      // defaultValue: "linkToWhiteSheet?"
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Anonymous board",
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
+
+// sequelize.sync({ force: true });
+
+// Board.create({ thumbUrl: "", title: "Alex's board" })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((err) => {
+//     console.log("ERROR: ", err);
+//   });
+
 class DataBase {
-  getAllBoards() {
-    return [
-      { id: Date.now(), thumbUrl: "", title: "Alex's board" },
-      { id: Date.now() + 1, thumbUrl: "", title: "Peter's board" },
-      { id: Date.now() + 2, thumbUrl: "", title: "Max's board" },
-    ];
+  async getAllBoards() {
+    return await Board.findAll();
   }
 }
 

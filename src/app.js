@@ -6,10 +6,10 @@ const port = 3003;
 
 app.use(express.json());
 
-app.get("/boards", (req, res) => {
+app.get("/boards", async (req, res) => {
   try {
     // get boards from db
-    let boards = dataBase.getAllBoards();
+    let boards = await dataBase.getAllBoards();
 
     //send boards
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
