@@ -1,10 +1,15 @@
 const express = require("express");
+const cors = require("cors");
 const dataBase = require("./services/DataBase");
 
 const app = express();
 const port = 3003;
 
 app.use(express.json());
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+app.use(cors(corsOptions));
 
 app.get("/boards", async (req, res) => {
   try {
@@ -12,7 +17,6 @@ app.get("/boards", async (req, res) => {
     let boards = await dataBase.getAllBoards();
 
     //send boards
-    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.status(200).send(boards);
   } catch (e) {
     console.log(e);
