@@ -56,6 +56,9 @@ class DataBase {
   async getAllBoards() {
     return await Board.findAll();
   }
+  async createBoard(newBoard) {
+    return await Board.create(newBoard);
+  }
 }
 
 module.exports = new DataBase();

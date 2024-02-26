@@ -24,6 +24,18 @@ app.get("/boards", async (req, res) => {
   }
 });
 
+app.post("/boards", async (req, res) => {
+  try {
+    const result = await dataBase.createBoard(req.body);
+    res
+      .status(200)
+      .send({ result, message: "Board was created successfully!" });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send({ message: "Something went wrong..." });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listen on port ${port}...`);
 });
